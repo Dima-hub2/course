@@ -1,0 +1,24 @@
+{
+  "name": "zoomagazin",
+  "version": "1.0.0",
+  "description": "Зоомагазин с Bootstrap и SCSS",
+  "main": "index.html",
+  "scripts": {
+    "sass-dev": "sass --watch scss/main.scss:css/style.css",
+    "sass-prod": "sass scss/main.scss:css/style.css --style compressed",
+    "sass-dark-dev": "sass --watch scss/dark-theme.scss:css/style-dark.css",
+    "sass-dark-prod": "sass scss/dark-theme.scss:css/style-dark.css --style compressed",
+    "build": "npm run sass-prod && npm run sass-dark-prod",
+    "dev": "sass --watch scss:css"
+  },
+  "keywords": [
+    "bootstrap",
+    "sass",
+    "zoomagazin"
+  ],
+  "author": "Dima Petrov",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.70.0"
+  }
+}

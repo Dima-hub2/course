@@ -1,0 +1,366 @@
+// ==========================================
+// ЗООМАГАЗИН "ДРУЗЬЯ ЖИВОТНЫХ" - ОСНОВНЫЕ СТИЛИ
+// ==========================================
+
+// ---------- ПЕРЕМЕННЫЕ (ЦВЕТА) ----------
+$primary-green: #198754;      // Основной зеленый (как в Bootstrap)
+$primary-dark: #146c43;       // Темно-зеленый (для наведения)
+$light-bg: #f8f9fa;           // Светлый фон
+$dark-bg: #2c3034;            // Темный фон
+$text-dark: #212529;          // Темный текст
+$text-light: #e9ecef;         // Светлый текст
+$border-color: #dee2e6;       // Цвет границ
+$card-shadow: rgba(0, 102, 255, 0.5); // Тень для карточек
+
+// ---------- МИКСИНЫ (ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ) ----------
+// Плавный переход
+@mixin transition($property: all) {
+    transition: $property 0.3s ease;
+}
+
+// Эффект при наведении на карточку
+@mixin card-hover {
+    @include transition(box-shadow);
+    &:hover {
+        box-shadow: 0 0 25px $card-shadow;
+    }
+}
+
+// Центрирование с flex
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// ---------- ОСНОВНЫЕ СТИЛИ ----------
+body {
+    background-color: $light-bg;
+    color: $text-dark;
+    @include transition(background-color);
+}
+
+// ---------- НАВИГАЦИЯ ----------
+.navbar {
+    background-color: $primary-green !important;
+    
+    // Логотип/бренд
+    .navbar-brand {
+        @include transition(transform);
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+    
+    // Пункты меню
+    .nav-link {
+        color: white !important;
+        @include transition;
+        
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        &.active {
+            font-weight: bold;
+            border-bottom: 2px solid white;
+        }
+    }
+}
+
+// ---------- КАРТОЧКИ ТОВАРОВ ----------
+.card {
+    @include card-hover;
+    border: 1px solid $border-color;
+    
+    .card-title {
+        color: $primary-green;
+        font-weight: bold;
+    }
+    
+    .card-header {
+        background-color: $primary-green;
+        color: white;
+    }
+}
+
+// ---------- ТАБЛИЦЫ ----------
+.table {
+    thead {
+        background-color: $primary-green;
+        color: white;
+    }
+    
+    tbody tr:hover {
+        background-color: rgba($primary-green, 0.1);
+    }
+    
+    &.table-striped tbody tr:nth-of-type(odd) {
+        background-color: rgba($primary-green, 0.05);
+    }
+}
+
+// ---------- КНОПКИ ----------
+.btn-success {
+    background-color: $primary-green;
+    border-color: $primary-green;
+    @include transition;
+    
+    &:hover {
+        background-color: $primary-dark;
+        border-color: $primary-dark;
+        transform: translateY(-2px);
+    }
+}
+
+.btn-outline-success {
+    color: $primary-green;
+    border-color: $primary-green;
+    @include transition;
+    
+    &:hover {
+        background-color: $primary-green;
+        color: white;
+        transform: translateY(-2px);
+    }
+}
+
+// ---------- КНОПКА "НАВЕРХ" ----------
+#backToTop {
+    width: 50px;
+    height: 50px;
+    @include flex-center;
+    @include transition(all);
+    background-color: $primary-green;
+    border: none;
+    
+    &:hover {
+        transform: scale(1.1);
+        background-color: $primary-dark;
+    }
+}
+.dark-theme {
+    // УНИВЕРСАЛЬНОЕ ПРАВИЛО - применится ко всем карточкам
+    [class*="card"] {
+        background-color: #343a40 !important;
+        border-color: #495057 !important;
+    }
+    
+    // Для всех заголовков
+    [class*="card-title"], [class*="title"] {
+        color: lighten($primary-green, 10%) !important;
+    }
+    
+    // Для всех текстов
+    [class*="card-text"], [class*="text"] {
+        color: #adb5bd !important;
+    }
+}
+.dark-theme {
+    // Для карточек, обернутых в ссылки
+    a {
+        .card {
+            background-color: #343a40 !important;
+            
+            // Заголовки с text-primary
+            .text-primary {
+                color: lighten($primary-green, 10%) !important;
+            }
+            
+            // Текст с text-secondary
+            .text-secondary {
+                color: #adb5bd !important;
+            }
+        }
+        
+        // Убираем белую рамку, если она есть
+        .card.border-0 {
+            border: 1px solid #495057 !important;
+        }
+    }
+    
+    // Для карточек с shadow-lg (убираем тень или меняем)
+    .shadow-lg {
+        box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5) !important;
+    }
+}
+
+// ---------- ФОРМЫ ----------
+.form-control, .form-select {
+    &:focus {
+        border-color: $primary-green;
+        box-shadow: 0 0 0 0.25rem rgba($primary-green, 0.25);
+    }
+}
+
+.input-group-text {
+    background-color: $light-bg;
+}
+
+// ---------- ФУТЕР ----------
+footer {
+    background-color: $primary-green;
+    color: white;
+    
+    a {
+        color: white;
+        text-decoration: none;
+        
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+// ---------- ТЕМНАЯ ТЕМА (класс для переключения) ----------
+.dark-theme {
+    background-color: $dark-bg !important;
+    color: $text-light !important;
+    
+    // Карточки в темной теме
+    .card {
+        background-color: #343a40;
+        border-color: #495057;
+        
+        .card-title {
+            color: lighten($primary-green, 10%);
+        }
+        
+        .card-text {
+            color: #adb5bd;
+        }
+    }
+    
+    // Таблицы в темной теме
+    .table {
+        color: $text-light;
+        
+        td, th {
+            border-color: #495057;
+        }
+        
+        thead {
+            background-color: $primary-dark;
+        }
+    }
+    
+    // Формы в темной теме
+    .form-control, .form-select, .input-group-text {
+        background-color: $dark-bg;
+        color: $text-light;
+        border-color: #495057;
+        
+        &::placeholder {
+            color: #6c757d;
+        }
+        
+        &:focus {
+            border-color: $primary-green;
+        }
+    }
+    
+    // Контакты в темной теме
+    address {
+        background-color: $dark-bg !important;
+        color: $text-light;
+        
+        a {
+            color: lighten($primary-green, 15%);
+        }
+    }
+    
+    // Кнопки в темной теме
+    .btn-success {
+        background-color: $primary-dark;
+        
+        &:hover {
+            background-color: darken($primary-dark, 10%);
+        }
+    }
+}
+
+// ---------- АНИМАЦИИ ----------
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Применяем анимацию к карточкам
+.card {
+    animation: fadeIn 0.5s ease;
+    
+    // Задержка для каждой карточки
+    @for $i from 1 through 10 {
+        &:nth-child(#{$i}) {
+            animation-delay: $i * 0.1s;
+        }
+    }
+}
+
+// ---------- АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ ----------
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    #backToTop {
+        width: 40px;
+        height: 40px;
+        bottom: 10px;
+        right: 10px;
+    }
+}
+
+.dark-theme {
+    background-color: $dark-bg !important;
+    
+    // Все карточки
+    .card, 
+    [class*="card"] {
+        background-color: #343a40 !important;
+        border: 1px solid #495057 !important;
+        
+        // Все заголовки в карточках
+        .card-title, 
+        h2, h3, h4, h5, h6,
+        [class*="title"] {
+            color: #479f76 !important;  // Светло-зеленый
+        }
+        
+        // Весь текст в карточках
+        .card-text,
+        p,
+        [class*="text"] {
+            color: #adb5bd !important;
+        }
+    }
+    
+    // Специально для ваших карточек с text-primary
+    .text-primary {
+        color: #479f76 !important;
+    }
+    
+    // Специально для ваших карточек с text-secondary
+    .text-secondary {
+        color: #adb5bd !important;
+    }
+    
+    // Для ссылок вокруг карточек
+    a.text-decoration-none {
+        .card {
+            &:hover {
+                border-color: #479f76 !important;
+            }
+        }
+    }
+}
